@@ -1,0 +1,844 @@
+{
+  "datasets": [
+    {
+      "name": "9f3c79aa",
+      "displayName": "gold_daily_bank_kpi",
+      "config": {
+        "version": "1.1",
+        "source": "banking.gold.gold_daily_bank_kpi",
+        "dimensions": [
+          {
+            "name": "txn_date",
+            "expr": "source.txn_date",
+            "displayName": "Txn Date"
+          },
+          {
+            "name": "total_customers",
+            "expr": "source.total_customers",
+            "displayName": "Total Customers"
+          },
+          {
+            "name": "total_accounts",
+            "expr": "source.total_accounts",
+            "displayName": "Total Accounts"
+          },
+          {
+            "name": "total_balance",
+            "expr": "source.total_balance",
+            "displayName": "Total Balance"
+          },
+          {
+            "name": "total_transactions",
+            "expr": "source.total_transactions",
+            "displayName": "Total Transactions"
+          },
+          {
+            "name": "total_transaction_amount",
+            "expr": "source.total_transaction_amount",
+            "displayName": "Total Transaction Amount"
+          },
+          {
+            "name": "avg_credit_score",
+            "expr": "source.avg_credit_score",
+            "displayName": "Avg Credit Score"
+          },
+          {
+            "name": "high_risk_customers",
+            "expr": "source.high_risk_customers",
+            "displayName": "High Risk Customers"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          },
+          {
+            "name": "balance_in_billions",
+            "expr": "SUM(`total_balance`) / 1000000000",
+            "displayName": "Balance in Billions"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "b272483f",
+      "displayName": "Gold Daily Bank KPI",
+      "layout": [
+        {
+          "widget": {
+            "name": "total_customers_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "max(total_customers)",
+                      "expression": "MAX(`total_customers`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Customers",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(total_customers)",
+                  "displayName": "Total Customers"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "total_accounts_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "max(total_accounts)",
+                      "expression": "MAX(`total_accounts`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Accounts",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(total_accounts)",
+                  "displayName": "Total Accounts"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "total_balance_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "max(total_balance)",
+                      "expression": "MAX(`total_balance`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Balance ($B)",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(total_balance)"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "total_transactions_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "max(total_transactions)",
+                      "expression": "MAX(`total_transactions`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Transactions",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(total_transactions)",
+                  "displayName": "Total Transactions"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "customers_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "sum(total_customers)",
+                      "expression": "SUM(`total_customers`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Customer Trends",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_customers)",
+                  "displayName": "Total Customers",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "balance_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "sum(total_balance)",
+                      "expression": "SUM(`total_balance`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Balance Trends",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_balance)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD"
+                  },
+                  "displayName": "Total Balance",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "transactions_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "sum(total_transactions)",
+                      "expression": "SUM(`total_transactions`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Transaction Volume",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_transactions)",
+                  "displayName": "Total Transactions",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "risk_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "sum(high_risk_customers)",
+                      "expression": "SUM(`high_risk_customers`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "High Risk Customers",
+                "showTitle": true
+              },
+              "mark": {
+                "colors": [
+                  "#FF6B6B"
+                ]
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(high_risk_customers)",
+                  "displayName": "High Risk Customers",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "credit_score_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "avg(avg_credit_score)",
+                      "expression": "AVG(`avg_credit_score`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Credit Score Trends",
+                "showTitle": true
+              },
+              "mark": {
+                "colors": [
+                  "#4ECDC4"
+                ]
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_credit_score)",
+                  "displayName": "Average Credit Score",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "transaction_amount_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "sum(total_transaction_amount)",
+                      "expression": "SUM(`total_transaction_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Transaction Amount",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "txn_date",
+                  "displayName": "Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_transaction_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD"
+                  },
+                  "displayName": "Total Transaction Amount",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 18,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "dashboard_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "<div align=\"center\">\n",
+                "\n",
+                "#                              Gold Daily Bank KPI\n",
+                "\n",
+                "</div>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "year",
+            "queries": [
+              {
+                "name": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_yearly(txn_date)",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "yearly(txn_date)",
+                      "expression": "DATE_TRUNC(\"YEAR\", `txn_date`)"
+                    },
+                    {
+                      "name": "yearly(txn_date)_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "yearly(txn_date)",
+                    "displayName": "YEARLY(txn_date)",
+                    "queryName": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_yearly(txn_date)"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "month",
+            "queries": [
+              {
+                "name": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_monthly(txn_date)",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "monthly(txn_date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `txn_date`)"
+                    },
+                    {
+                      "name": "monthly(txn_date)_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Month"
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "monthly(txn_date)",
+                    "displayName": "MONTHLY(txn_date)",
+                    "queryName": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_monthly(txn_date)"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "day",
+            "queries": [
+              {
+                "name": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_daily(txn_date)",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "daily(txn_date)",
+                      "expression": "DATE_TRUNC(\"DAY\", `txn_date`)"
+                    },
+                    {
+                      "name": "daily(txn_date)_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Day"
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "daily(txn_date)",
+                    "displayName": "DAILY(txn_date)",
+                    "queryName": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_daily(txn_date)"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 1,
+            "width": 4,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "global_filters",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "date_filter",
+            "queries": [
+              {
+                "name": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_txn_date",
+                "query": {
+                  "datasetName": "9f3c79aa",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "txn_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "selection": {
+                "defaultSelection": {
+                  "range": {
+                    "dataType": "DATE",
+                    "min": {
+                      "value": "2024-01-01"
+                    },
+                    "max": {
+                      "value": "2025-12-31"
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "title": "Filtrer par date",
+                "showTitle": true
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "txn_date",
+                    "queryName": "dashboards/01f1459caf2516019a39a8960da314c6/datasets/01f1459cd8221abbacd517e0fd202dde_txn_date"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 3
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F5F7FA",
+        "dark": "#1A1D24"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#242830"
+      },
+      "widgetBorderColor": {
+        "light": "#E0E3E8",
+        "dark": "#3A3F4B"
+      },
+      "fontColor": {
+        "light": "#2C3E50",
+        "dark": "#E8EAED"
+      },
+      "selectionColor": {
+        "light": "#1E88E5",
+        "dark": "#42A5F5"
+      },
+      "visualizationColors": [
+        "#1E88E5",
+        "#43A047",
+        "#FB8C00",
+        "#E53935",
+        "#8E24AA",
+        "#00ACC1",
+        "#FDD835",
+        "#3949AB"
+      ],
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
